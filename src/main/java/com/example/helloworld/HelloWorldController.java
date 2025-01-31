@@ -15,6 +15,9 @@ public class HelloWorldController {
 	@Autowired
 	private PatientService patientService;
 
+	@Autowired
+    private CustomerService customerService;
+
 
     @GetMapping("/page1")
     public String hello1() {
@@ -41,6 +44,12 @@ public class HelloWorldController {
     @GetMapping("/page4")
     public List<Patient> hello4() {
         return patientService.getAllPatients();
+    }
+    
+    
+    @GetMapping("/page5/Customers")
+    public List<Customer> getAllCustomers() {
+        return customerService.getAllCustomers();
     }
     
     
