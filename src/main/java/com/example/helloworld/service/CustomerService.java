@@ -1,7 +1,10 @@
-package com.example.helloworld;
+package com.example.helloworld.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.example.helloworld.model.Customer;
+import com.example.helloworld.repository.CustomerRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +26,7 @@ public class CustomerService {
     }
 
     // Find a customer by ID
-    public Optional<Customer> findCustomerById(Long id) {
+    public Optional<com.example.helloworld.model.Customer> findCustomerById(Long id) {
         return customerRepository.findById(id);
     }
 

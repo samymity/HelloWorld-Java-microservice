@@ -1,4 +1,4 @@
-package com.example.helloworld;
+package com.example.helloworld.model; // Adjust package if necessary
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

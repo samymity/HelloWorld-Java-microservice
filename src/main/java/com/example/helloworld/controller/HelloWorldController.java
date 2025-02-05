@@ -1,4 +1,4 @@
-package com.example.helloworld;
+package com.example.helloworld.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import jakarta.validation.Valid;
+import com.example.helloworld.model.Customer;
+import com.example.helloworld.service.CustomerService;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class HelloWorldController {
 	
-	@Autowired
-	private PatientService patientService;
+
 
 	@Autowired
     private CustomerService customerService;
@@ -49,10 +49,7 @@ public class HelloWorldController {
         return response;
     }
     
-    @GetMapping("/page4")
-    public List<Patient> hello4() {
-        return patientService.getAllPatients();
-    }
+  
     
     
     @GetMapping("/page5/Customers")
@@ -62,7 +59,7 @@ public class HelloWorldController {
     
     // Create a new customer
     @PostMapping("/page6/createCustomers")
-    public ResponseEntity<Customer> createCustomer(@RequestBody @Valid Customer customer) {
+    public ResponseEntity<Customer> createCustomer(@RequestBody  Customer customer) {
         Customer savedCustomer = customerService.saveCustomer(customer);
         return new ResponseEntity<>(savedCustomer, HttpStatus.CREATED);
     }
