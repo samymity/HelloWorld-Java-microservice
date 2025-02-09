@@ -3,33 +3,40 @@ package com.example.helloworld.controller;
 import com.example.helloworld.entity.MySQLPatient;
 import com.example.helloworld.service.MySQLPatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/mysql/patients")
+@RequestMapping("/patients")
 public class MySQLPatientController {
+
     @Autowired
     private MySQLPatientService mySQLPatientService;
 
     @PostMapping
-    public MySQLPatient createPatient(@RequestBody MySQLPatient patient) {
-        return mySQLPatientService.createPatient(patient);
+    public ResponseEntity<MySQLPatient> createPatient(@RequestBody MySQLPatient patient) {
+        MySQLPatient savedPatient = mySQLPatientService.savePatient(patient);
+        return new ResponseEntity<>(savedPatient, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public List<MySQLPatient> getAllPatients() {
-        return mySQLPatientService.getAllPatients();
+    public ResponseEntity<List<MySQLPatient>> getAllPatients() {
+        List<MySQLPatient> patients = mySQLPatientService.getAllPatients();
+        return new ResponseEntity<>(patients, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public MySQLPatient getPatientById(@PathVariable Long id) {
-        return mySQLPatientService.getPatientById(id);
+    public ResponseEntity<MySQLPatient> getPatientById(@PathVariable Long id) {
+        MySQLPatient patient = mySQLPatientService.getPatientById(id);
+        return patient != null ? new ResponseEntity<>(patient, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/{id}")
-    public void deletePatient(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePatient(@PathVariable Long id) {
         mySQLPatientService.deletePatient(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

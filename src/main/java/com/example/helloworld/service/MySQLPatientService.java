@@ -9,11 +9,11 @@ import java.util.List;
 
 @Service
 public class MySQLPatientService {
+
     @Autowired
     private MySQLPatientRepository mySQLPatientRepository;
 
-    // CRUD methods for MySQL
-    public MySQLPatient createPatient(MySQLPatient patient) {
+    public MySQLPatient savePatient(MySQLPatient patient) {
         return mySQLPatientRepository.save(patient);
     }
 
